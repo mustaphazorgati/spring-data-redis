@@ -336,7 +336,13 @@ class DefaultReactiveListOperations<K, V> implements ReactiveListOperations<K, V
 		return template.doCreateFlux(connection -> function.apply(connection.listCommands()));
 	}
 
-	private boolean isZeroOrGreaterOneSecond(Duration timeout) {
+	/**
+	 * Determines if the timeout duration is either {@literal 0} or greater than or equal to {@code 1 seconds}.
+	 *
+	 * @param timeout the duration to check
+	 * @return whether the duration is either {@literal 0} or greater than or equal to {@code 1 seconds}.
+	 */
+	static boolean isZeroOrGreaterOneSecond(Duration timeout) {
 		return timeout.isZero() || timeout.compareTo(Duration.ofSeconds(1)) >= 0;
 	}
 
